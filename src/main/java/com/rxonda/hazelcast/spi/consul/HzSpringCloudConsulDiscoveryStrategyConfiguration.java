@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.serviceregistry.Registration;
 import org.springframework.cloud.client.serviceregistry.ServiceRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +19,7 @@ public class HzSpringCloudConsulDiscoveryStrategyConfiguration {
     private DiscoveryClient discoveryClient;
 
     @Autowired
-    private ServiceRegistry serviceRegistry;
+    private ServiceRegistry<Registration> serviceRegistry;
 
     @Bean(name = "hzDiscoveryStrategyFactory")
     @ConditionalOnMissingBean

@@ -9,6 +9,7 @@ import com.hazelcast.spi.discovery.DiscoveryNode;
 import com.hazelcast.spi.discovery.DiscoveryStrategy;
 import com.hazelcast.spi.discovery.DiscoveryStrategyFactory;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.serviceregistry.Registration;
 import org.springframework.cloud.client.serviceregistry.ServiceRegistry;
 
 import java.util.Arrays;
@@ -21,9 +22,9 @@ public class HzSpringCloudConsulDiscoveryStrategyFactory implements DiscoveryStr
 
     private DiscoveryClient discoveryClient;
 
-    private ServiceRegistry serviceRegistry;
+    private ServiceRegistry<Registration> serviceRegistry;
 
-    public HzSpringCloudConsulDiscoveryStrategyFactory(DiscoveryClient discoveryClient, ServiceRegistry serviceRegistry) {
+    public HzSpringCloudConsulDiscoveryStrategyFactory(DiscoveryClient discoveryClient, ServiceRegistry<Registration> serviceRegistry) {
         this.discoveryClient = discoveryClient;
         this.serviceRegistry = serviceRegistry;
     }

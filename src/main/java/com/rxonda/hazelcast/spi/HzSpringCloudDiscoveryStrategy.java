@@ -22,12 +22,12 @@ import static com.rxonda.hazelcast.spi.consul.HzSpringCloudConsulDiscoveryStrate
 @Slf4j
 public abstract class HzSpringCloudDiscoveryStrategy extends AbstractDiscoveryStrategy {
     protected DiscoveryClient discoveryClient;
-    protected ServiceRegistry serviceRegistry;
+    protected ServiceRegistry<Registration> serviceRegistry;
     protected DiscoveryNode discoveryNode;
     protected Registration registration;
     protected String applicationScope;
 
-    public HzSpringCloudDiscoveryStrategy(DiscoveryClient discoveryClient, ServiceRegistry serviceRegistry,
+    public HzSpringCloudDiscoveryStrategy(DiscoveryClient discoveryClient, ServiceRegistry<Registration> serviceRegistry,
                                           DiscoveryNode discoveryNode, ILogger logger,
                                           Map<String, Comparable> properties) {
         super(logger, properties);

@@ -20,7 +20,7 @@ import java.util.Map;
 @Slf4j
 public class HzSpringCloudConsulDiscoveryStrategy extends HzSpringCloudDiscoveryStrategy {
 
-    public HzSpringCloudConsulDiscoveryStrategy(DiscoveryClient discoveryClient, ServiceRegistry serviceRegistry,
+    public HzSpringCloudConsulDiscoveryStrategy(DiscoveryClient discoveryClient, ServiceRegistry<Registration> serviceRegistry,
                                                 DiscoveryNode discoveryNode, ILogger logger,
                                                 Map<String, Comparable> properties) {
         super(discoveryClient, serviceRegistry, discoveryNode, logger, properties);
