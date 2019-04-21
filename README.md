@@ -9,7 +9,7 @@ $ ./gradlew clean jar
 ```
 Then, add it to your projects libs.
 
-Or, we can use [JitPack] (https://jitpack.io)
+Or, we can use [JitPack](https://jitpack.io)
 Then, add it to your dependencies:
 ```groovy
 compile 'com.github.rxonda:SpringCloudHazelcastDiscoverySpi:v1.0-alpha'
