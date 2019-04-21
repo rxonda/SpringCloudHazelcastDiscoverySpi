@@ -24,11 +24,6 @@ public class HzSpringCloudConsulDiscoveryStrategyProperties {
     public static final PropertyDefinition DISCOVERY_DELAY =
             new SimplePropertyDefinition("consul.discovery-delay", true, INTEGER);
 
-    public static final PropertyDefinition BI_PORT =
-            new SimplePropertyDefinition("consul.biservice-port", true, INTEGER);
-
     public static final PropertyDefinition HEALTHCHECK_URL =
             new SimplePropertyDefinition("consul.healthcheck-url", true, STRING);
-
-
 }

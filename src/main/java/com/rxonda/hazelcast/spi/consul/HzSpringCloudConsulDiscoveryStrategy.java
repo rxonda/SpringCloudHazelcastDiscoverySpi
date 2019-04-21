@@ -14,8 +14,13 @@ import org.springframework.cloud.commons.util.InetUtilsProperties;
 import org.springframework.cloud.consul.discovery.ConsulDiscoveryProperties;
 import org.springframework.cloud.consul.serviceregistry.ConsulRegistration;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static com.rxonda.hazelcast.spi.consul.HzSpringCloudConsulDiscoveryStrategyProperties.*;
+import static com.rxonda.hazelcast.spi.consul.HzSpringCloudConsulDiscoveryStrategyProperties.HEALTHCHECK_URL;
 
 @Slf4j
 public class HzSpringCloudConsulDiscoveryStrategy extends HzSpringCloudDiscoveryStrategy {
@@ -27,8 +32,23 @@ public class HzSpringCloudConsulDiscoveryStrategy extends HzSpringCloudDiscovery
     }
 
     @Override
-    protected Registration buildRegistration(List<String> tags, boolean preferPublic, int discoveryDelay, int biPort, String healthCheckUrl, String checkInterval) {
-        log.info("Starting Hazelcast consul discovery strategy...");
+    protected Registration buildRegistration() {
+        log.info("Starting Hazelcast Consul Discovery Strategy...");
+
+        boolean preferPublic = getOrDefault(PREFER_PUBLIC_IP, false);
+        int discoveryDelay = getOrDefault(DISCOVERY_DELAY, 10_000);
+        String checkInterval = getOrDefault(CHECK_INTERVAL, "30s");
+        this.applicationScope = getOrDefault(APPLICATION_SCOPE, "hazelcast");
+        List<String> tags = Arrays.stream(getOrDefault(TAGS, "hazelcast").split(","))
+                .collect(Collectors.toList());
+        String healthCheckUrl = getOrDefault(HEALTHCHECK_URL, "/health");
+
+        log.info("Aplication Scope: " + this.applicationScope);
+        log.info("Aplication Tags: "+ tags);
+        log.info("Prefer public IP: " + preferPublic);
+        log.info("Discovery delay: " + discoveryDelay);
+        log.info("Check interval: " + checkInterval);
+        log.info("Health check URL: " + healthCheckUrl);
 
         Address address = (preferPublic) ? discoveryNode.getPublicAddress() : discoveryNode.getPrivateAddress();
         String hostname = address.getHost();
