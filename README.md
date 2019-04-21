@@ -27,12 +27,12 @@ In the hazelcast Config bean, add it to JoinConfig and mark Tcp and Multicast to
 The discoveryStrategyConfig will be created by the autoconfigure spring boot feature.
 
 ## Configuration
-hazelcast.discovery.consul.group-name -> consul group name
-hazelcast.discovery.consul.tags -> consul tags
-hazelcast.discovery.consul.discovery-delay -> consul discovery delay
-hazelcast.discovery.consul.check-interval -> consul check interval
-hazelcast.discovery.consul.prefer-public -> to registry the public ip on consul regitry
-hazelcast.discovery.consul.healthcheck-url -> path to application's health check endpoint
+*hazelcast.discovery.consul.group-name: consul group name
+*hazelcast.discovery.consul.tags: consul tags
+*hazelcast.discovery.consul.discovery-delay: consul discovery delay
+*hazelcast.discovery.consul.check-interval: consul check interval
+*hazelcast.discovery.consul.prefer-public: to registry the public ip on consul regitry
+*hazelcast.discovery.consul.healthcheck-url: path to application's health check endpoint
 
 ## Considerations
 For http health check works correctly, we have to provide the following configurations of the spring boot application:
