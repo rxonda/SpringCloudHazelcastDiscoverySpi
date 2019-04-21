@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.rxonda.hazelcast.spi.consul.HzSpringCloudConsulDiscoveryStrategyConfiguration
+com.rxonda.hazelcast.spi.consul.HzSpringCloudConsulDiscoveryStrategyAutoConfiguration
