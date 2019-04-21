@@ -5,7 +5,6 @@ import com.hazelcast.nio.Address;
 import com.hazelcast.spi.discovery.AbstractDiscoveryStrategy;
 import com.hazelcast.spi.discovery.DiscoveryNode;
 import com.hazelcast.spi.discovery.SimpleDiscoveryNode;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.serviceregistry.Registration;
@@ -15,7 +14,6 @@ import java.net.UnknownHostException;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Slf4j
 public abstract class HzSpringCloudDiscoveryStrategy extends AbstractDiscoveryStrategy {
     protected DiscoveryClient discoveryClient;
     protected ServiceRegistry<Registration> serviceRegistry;

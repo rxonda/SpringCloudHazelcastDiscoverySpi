@@ -5,7 +5,6 @@ import com.hazelcast.logging.ILogger;
 import com.hazelcast.nio.Address;
 import com.hazelcast.spi.discovery.DiscoveryNode;
 import com.rxonda.hazelcast.spi.HzSpringCloudDiscoveryStrategy;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.serviceregistry.Registration;
 import org.springframework.cloud.client.serviceregistry.ServiceRegistry;
@@ -20,9 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.rxonda.hazelcast.spi.consul.HzSpringCloudConsulDiscoveryStrategyProperties.*;
-import static com.rxonda.hazelcast.spi.consul.HzSpringCloudConsulDiscoveryStrategyProperties.HEALTHCHECK_URL;
 
-@Slf4j
 public class HzSpringCloudConsulDiscoveryStrategy extends HzSpringCloudDiscoveryStrategy {
 
     public HzSpringCloudConsulDiscoveryStrategy(DiscoveryClient discoveryClient, ServiceRegistry<Registration> serviceRegistry,
@@ -33,7 +30,7 @@ public class HzSpringCloudConsulDiscoveryStrategy extends HzSpringCloudDiscovery
 
     @Override
     protected Registration buildRegistration() {
-        log.info("Starting Hazelcast Consul Discovery Strategy...");
+        getLogger().info("Starting Hazelcast Consul Discovery Strategy...");
 
         boolean preferPublic = getOrDefault(PREFER_PUBLIC_IP, false);
         int discoveryDelay = getOrDefault(DISCOVERY_DELAY, 10_000);
@@ -43,12 +40,12 @@ public class HzSpringCloudConsulDiscoveryStrategy extends HzSpringCloudDiscovery
                 .collect(Collectors.toList());
         String healthCheckUrl = getOrDefault(HEALTHCHECK_URL, "/health");
 
-        log.info("Aplication Scope: " + this.applicationScope);
-        log.info("Aplication Tags: "+ tags);
-        log.info("Prefer public IP: " + preferPublic);
-        log.info("Discovery delay: " + discoveryDelay);
-        log.info("Check interval: " + checkInterval);
-        log.info("Health check URL: " + healthCheckUrl);
+        getLogger().info("Aplication Scope: " + this.applicationScope);
+        getLogger().info("Aplication Tags: "+ tags);
+        getLogger().info("Prefer public IP: " + preferPublic);
+        getLogger().info("Discovery delay: " + discoveryDelay);
+        getLogger().info("Check interval: " + checkInterval);
+        getLogger().info("Health check URL: " + healthCheckUrl);
 
         Address address = (preferPublic) ? discoveryNode.getPublicAddress() : discoveryNode.getPrivateAddress();
         String hostname = address.getHost();

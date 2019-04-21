@@ -42,7 +42,11 @@ public class HzSpringCloudConsulDiscoveryStrategyFactory implements DiscoveryStr
     @Override
     public Collection<PropertyDefinition> getConfigurationProperties() {
         return Arrays.asList(
-                APPLICATION_SCOPE, TAGS, CHECK_INTERVAL, PREFER_PUBLIC_IP, DISCOVERY_DELAY, BI_PORT
+                APPLICATION_SCOPE,
+                TAGS,
+                CHECK_INTERVAL,
+                PREFER_PUBLIC_IP,
+                DISCOVERY_DELAY
         );
     }
 }
