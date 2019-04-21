@@ -46,7 +46,10 @@ public class HzSpringCloudConsulDiscoveryStrategyFactory implements DiscoveryStr
                 TAGS,
                 CHECK_INTERVAL,
                 PREFER_PUBLIC_IP,
-                DISCOVERY_DELAY
+                DISCOVERY_DELAY,
+                HEALTHCHECK_URL,
+                SPRING_BOOT_PORT,
+                SPRING_BOOT_PROTOCOL
         );
     }
 }

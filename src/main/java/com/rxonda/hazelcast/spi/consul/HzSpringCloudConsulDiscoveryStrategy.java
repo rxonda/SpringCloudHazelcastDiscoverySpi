@@ -38,7 +38,14 @@ public class HzSpringCloudConsulDiscoveryStrategy extends HzSpringCloudDiscovery
         this.applicationScope = getOrDefault(APPLICATION_SCOPE, "hazelcast");
         List<String> tags = Arrays.stream(getOrDefault(TAGS, "hazelcast").split(","))
                 .collect(Collectors.toList());
-        String healthCheckUrl = getOrDefault(HEALTHCHECK_URL, "/health");
+        String healthCheckPath = getOrDefault(HEALTHCHECK_URL, "/health");
+        Integer springBootPort = getOrDefault(SPRING_BOOT_PORT, 8080);
+        String springBootProtocol = getOrDefault(SPRING_BOOT_PROTOCOL, "http");
+        Address address = (preferPublic) ? discoveryNode.getPublicAddress() : discoveryNode.getPrivateAddress();
+        String hostname = address.getHost();
+        int port = address.getPort();
+
+        String healthCheckUrl = springBootProtocol + "://" + hostname + ":" + springBootPort + healthCheckPath;
 
         getLogger().info("Aplication Scope: " + this.applicationScope);
         getLogger().info("Aplication Tags: "+ tags);
@@ -46,10 +53,6 @@ public class HzSpringCloudConsulDiscoveryStrategy extends HzSpringCloudDiscovery
         getLogger().info("Discovery delay: " + discoveryDelay);
         getLogger().info("Check interval: " + checkInterval);
         getLogger().info("Health check URL: " + healthCheckUrl);
-
-        Address address = (preferPublic) ? discoveryNode.getPublicAddress() : discoveryNode.getPrivateAddress();
-        String hostname = address.getHost();
-        int port = address.getPort();
 
         NewService service = new NewService();
         service.setName(this.applicationScope);

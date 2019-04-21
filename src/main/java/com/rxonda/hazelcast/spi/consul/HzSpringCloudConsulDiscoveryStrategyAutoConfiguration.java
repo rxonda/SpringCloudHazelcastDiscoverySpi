@@ -2,13 +2,11 @@ package com.rxonda.hazelcast.spi.consul;
 
 import com.hazelcast.config.DiscoveryStrategyConfig;
 import com.hazelcast.spi.discovery.DiscoveryStrategyFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.client.serviceregistry.Registration;
 import org.springframework.cloud.client.serviceregistry.ServiceRegistry;
 import org.springframework.cloud.consul.discovery.ConsulDiscoveryClientConfiguration;
 import org.springframework.cloud.consul.serviceregistry.ConsulServiceRegistryAutoConfiguration;
@@ -25,15 +23,9 @@ import java.util.Map;
 @ConditionalOnProperty(value = "spring.cloud.consul.enabled")
 public class HzSpringCloudConsulDiscoveryStrategyAutoConfiguration {
 
-    @Autowired
-    private DiscoveryClient discoveryClient;
-
-    @Autowired
-    private ServiceRegistry serviceRegistry;
-
     @Bean(name = "discoveryStrategyFactory")
     @ConditionalOnMissingBean
-    public DiscoveryStrategyFactory hzDiscoveryStrategyFactory() {
+    public DiscoveryStrategyFactory hzDiscoveryStrategyFactory(DiscoveryClient discoveryClient, ServiceRegistry serviceRegistry) {
         return new HzSpringCloudConsulDiscoveryStrategyFactory(discoveryClient, serviceRegistry);
     }
 
@@ -45,6 +37,12 @@ public class HzSpringCloudConsulDiscoveryStrategyAutoConfiguration {
         props.put("consul.discovery-delay", env.getProperty("hazelcast.discovery.consul.discovery-delay","10000"));
         props.put("consul.check-interval", env.getProperty("hazelcast.discovery.consul.check-interval","30s"));
         props.put("consul.prefer-public", env.getProperty("hazelcast.discovery.consul.prefer-public", "false"));
+        String healthCheckUrl = env.getProperty("hazelcast.discovery.consul.healthcheck-url", "/health");
+        String springBootPort = env.getProperty("server.port", "8080");
+        String springBootProtocol = env.getProperty("server.protocol", "http");
+        props.put("consul.healthcheck-url", healthCheckUrl);
+        props.put("consul.spring-boot-port", springBootPort);
+        props.put("consul.spring-boot-protocol", springBootProtocol);
         return  new DiscoveryStrategyConfig(discoveryStrategyFactory, props);
     }
 }
