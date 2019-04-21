@@ -9,6 +9,12 @@ $ ./gradlew clean jar
 ```
 Then, add it to your projects libs.
 
+Or, we can use [JitPack] (https://jitpack.io)
+Then, add it to your dependencies:
+```groovy
+compile 'com.github.rxonda:SpringCloudHazelcastDiscoverySpi:v1.0-alpha'
+```
+
 In the hazelcast Config bean, add it to JoinConfig and mark Tcp and Multicast to false:
 ```java
 @Bean Config config(DiscoveryStrategyConfig discoveryStrategyConfig) {
