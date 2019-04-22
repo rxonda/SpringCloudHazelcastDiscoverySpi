@@ -48,6 +48,7 @@ public class HzSpringCloudConsulDiscoveryStrategyFactory implements DiscoveryStr
                 PREFER_PUBLIC_IP,
                 DISCOVERY_DELAY,
                 HEALTHCHECK_URL,
+                INSTANCE_ID,
                 SPRING_BOOT_PORT,
                 SPRING_BOOT_PROTOCOL
         );

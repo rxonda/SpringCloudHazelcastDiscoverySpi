@@ -27,6 +27,9 @@ public class HzSpringCloudConsulDiscoveryStrategyProperties {
     public static final PropertyDefinition HEALTHCHECK_URL =
             new SimplePropertyDefinition("consul.healthcheck-url", true, STRING);
 
+    public static final PropertyDefinition INSTANCE_ID =
+            new SimplePropertyDefinition("consul.instance-id", true, STRING);
+
     public static final PropertyDefinition SPRING_BOOT_PORT =
             new SimplePropertyDefinition("consul.spring-boot-port", true, INTEGER);
 

@@ -21,7 +21,7 @@ In the hazelcast Config bean, add it to JoinConfig and mark Tcp and Multicast to
 	Config config = new Config();
 	config.getNetworkConfig()
 		.getJoinConfig()
-			.setMulticastConfig(new MulticastConfig().setEnabled(true))
+			.setMulticastConfig(new MulticastConfig().setEnabled(false))
 	                .setTcpIpConfig(new TcpIpConfig().setEnabled(false))
         	        .setAwsConfig(new AwsConfig().setEnabled(false))
 			.getDiscoveryConfig()
@@ -37,7 +37,8 @@ The discoveryStrategyConfig will be created by the autoconfigure spring boot fea
 * hazelcast.discovery.consul.tags: consul tags
 * hazelcast.discovery.consul.discovery-delay: consul discovery delay
 * hazelcast.discovery.consul.check-interval: consul check interval
-* hazelcast.discovery.consul.prefer-public: to registry the public ip on consul regitry
+* hazelcast.discovery.consul.prefer-public: to registry the public ip on consul registry
+* hazelcast.discovery.consul.instance-id: the instance id
 * hazelcast.discovery.consul.healthcheck-url: path to application's health check endpoint
 
 ## Considerations

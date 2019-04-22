@@ -47,19 +47,22 @@ public class HzSpringCloudConsulDiscoveryStrategy extends HzSpringCloudDiscovery
 
         String healthCheckUrl = springBootProtocol + "://" + hostname + ":" + springBootPort + healthCheckPath;
 
+        String instanceId = getOrDefault(INSTANCE_ID, hostname + "-" + port + "-hazelcast");
+
         getLogger().info("Aplication Scope: " + this.applicationScope);
         getLogger().info("Aplication Tags: "+ tags);
         getLogger().info("Prefer public IP: " + preferPublic);
         getLogger().info("Discovery delay: " + discoveryDelay);
         getLogger().info("Check interval: " + checkInterval);
         getLogger().info("Health check URL: " + healthCheckUrl);
+        getLogger().info("Instance ID: " + instanceId);
 
         NewService service = new NewService();
         service.setName(this.applicationScope);
         service.setAddress(hostname);
         service.setPort(port);
         service.setTags(tags);
-        service.setId(hostname + "-" + port + "-hazelcast");
+        service.setId(instanceId);
         NewService.Check check = new NewService.Check();
         check.setInterval(checkInterval);
         check.setHttp(healthCheckUrl);

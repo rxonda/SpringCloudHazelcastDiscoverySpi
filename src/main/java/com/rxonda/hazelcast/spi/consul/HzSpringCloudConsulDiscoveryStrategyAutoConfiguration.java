@@ -41,6 +41,9 @@ public class HzSpringCloudConsulDiscoveryStrategyAutoConfiguration {
         String springBootPort = env.getProperty("server.port", "8080");
         String springBootProtocol = env.getProperty("server.protocol", "http");
         props.put("consul.healthcheck-url", healthCheckUrl);
+        if(env.containsProperty("hazelcast.discovery.consul.instance-id")) {
+            props.put("consul.instance-id", env.getProperty("hazelcast.discovery.consul.instance-id"));
+        }
         props.put("consul.spring-boot-port", springBootPort);
         props.put("consul.spring-boot-protocol", springBootProtocol);
         return  new DiscoveryStrategyConfig(discoveryStrategyFactory, props);

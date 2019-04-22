@@ -30,12 +30,12 @@ repositories { mavenCentral() }
 dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-autoconfigure-processor"
     
-    compile 'org.springframework.boot:spring-boot-starter'
-    compile 'org.springframework.cloud:spring-cloud-starter-consul-discovery:2.0.1.RELEASE'
-//    compile 'org.springframework.cloud:spring-cloud-consul-config:2.0.1.RELEASE'
-    compile 'com.hazelcast:hazelcast:3.9.3'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.cloud:spring-cloud-starter-consul-discovery:2.0.1.RELEASE'
+//    implementation 'org.springframework.cloud:spring-cloud-consul-config:2.0.1.RELEASE'
+    implementation 'com.hazelcast:hazelcast:3.9.3'
     
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // Use the latest Groovy version for Spock testing
     testImplementation 'org.codehaus.groovy:groovy-all:2.5.6'
